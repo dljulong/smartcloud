@@ -39,7 +39,7 @@ spring:
 
 jwt:
   header: Authorization
-  secret: mySecret
+  secret: 88888888
   expiration: 604800
 
 logging:

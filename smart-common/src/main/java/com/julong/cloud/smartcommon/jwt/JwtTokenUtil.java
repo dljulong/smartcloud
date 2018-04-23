@@ -1,10 +1,9 @@
-package com.jldata.smartframe.core.security;
+package com.julong.cloud.smartcommon.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -27,15 +26,13 @@ public class JwtTokenUtil implements Serializable {
     static final String AUDIENCE_MOBILE = "mobile";
     static final String AUDIENCE_TABLET = "tablet";
 
-
-
-    @Value("${jwt.secret:88888888}")
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${jwt.expiration}")
+    @Value("${jwt.expiration:86400}")
     private Long expiration;
 
-    public String getUsernameFromToken(String token) {
+    public String getUseridFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -77,9 +74,8 @@ public class JwtTokenUtil implements Serializable {
         return (AUDIENCE_TABLET.equals(audience) || AUDIENCE_MOBILE.equals(audience));
     }
 
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = new HashMap<>();
-        return doGenerateToken(claims, userDetails.getUsername(), AUDIENCE_WEB);
+    public String generateToken(String userid,Map<String, Object>claims) {
+        return doGenerateToken(claims, userid, AUDIENCE_WEB);
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject, String audience) {
@@ -118,16 +114,10 @@ public class JwtTokenUtil implements Serializable {
                 .compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        JwtUser user = (JwtUser) userDetails;
-        final String username = getUsernameFromToken(token);
+    public Boolean validateToken(String token) {
+        final String username = getUseridFromToken(token);
         final Date created = getIssuedAtDateFromToken(token);
-        //final Date expiration = getExpirationDateFromToken(token);
-        return (
-              username.equals(user.getUsername())
-                    && !isTokenExpired(token)
-                    && !isCreatedBeforeLastPasswordReset(created, user.getLastPasswordResetDate())
-        );
+        return isTokenExpired(token);
     }
 
     private Date calculateExpirationDate(Date createdDate) {
