@@ -11,7 +11,7 @@ import org.junit.Before;
  */
 public class TestRestBase {
 
-    public final static String PRE_PATH="/admin";
+    public final static String PRE_PATH="/auth";
 
 
     @Before

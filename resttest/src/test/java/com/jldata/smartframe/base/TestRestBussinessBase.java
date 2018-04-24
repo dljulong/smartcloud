@@ -56,7 +56,7 @@ public class TestRestBussinessBase extends TestRestBase {
         Map<String,String> param = new HashMap<String,String>();
         param.put("username","admin");
         param.put("password", "123456");
-        Response r = RestAssured.given().contentType("application/json").body(param).post(""+PRE_PATH+"/auth/login");
+        Response r = RestAssured.given().contentType("application/json").body(param).post("/admin/auth/login");
         r.then().statusCode(200).body("errcode", Matchers.equalTo(200));
         r.prettyPrint();
         Map m =   r.as(Map.class);
