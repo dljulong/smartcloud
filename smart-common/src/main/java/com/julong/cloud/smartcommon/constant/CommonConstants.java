@@ -5,7 +5,7 @@ package com.julong.cloud.smartcommon.constant;
  */
 public class CommonConstants {
     // 用户token异常
-    public static final Integer EX_USER_INVALID_TOKEN = 40101;
+    public static final Integer EX_USER_INVALID_TOKEN = 401;
     public static final Integer EX_OTHER_CODE = 500;
     public static final String CONTEXT_KEY_USER_ID = "currentUserId";
     public static final String CONTEXT_KEY_USERNAME = "currentUserName";

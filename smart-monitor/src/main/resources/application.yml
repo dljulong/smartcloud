@@ -1,0 +1,19 @@
+spring:
+    application:
+        name: smart-monitor
+
+server:
+    port: 8764 #Æô¶¯¶Ë¿Ú
+
+eureka:
+     instance:
+        preferIpAddress: true
+        statusPageUrlPath: /actuator/info
+        healthCheckUrlPath: /actuator/health
+     client:
+        registerWithEureka: true
+        fetchRegistry: true
+        serviceUrl:
+            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
+
+

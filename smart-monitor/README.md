@@ -1,0 +1,1 @@
+smart-monitor监控spring cloud 的项目状态

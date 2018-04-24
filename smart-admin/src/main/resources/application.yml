@@ -1,6 +1,6 @@
 spring:
     application:
-        name: ace-auth
+        name: smart-admin
     jackson:
         date-format: yyyy-MM-dd HH:mm:ss
         time-zone: GMT+8
@@ -28,42 +28,41 @@ spring:
         show-sql: true
         properties:
           hibernate:
-            dialect: com.jldata.smartframe.core.common.MySQL5DialectUTF8
+            dialect: com.julong.cloud.smartcommon.jdbc.MySQL5DialectUTF8
         database: mysql
     datasource:
-      name: test
-      url: jdbc:mysql://${MYSQL_HOST:47.75.36.103}:${MYSQL_PORT:3333}/test?useUnicode=true&characterEncoding=UTF8
-      username: db_test
-      password: db_test
-      # 使用druid数据源
-      type: com.alibaba.druid.pool.DruidDataSource
-      driver-class-name: com.mysql.jdbc.Driver
-      filters: stat
-      maxActive: 20
-      initialSize: 1
-      maxWait: 60000
-      minIdle: 1
-      timeBetweenEvictionRunsMillis: 60000
-      minEvictableIdleTimeMillis: 300000
-      validationQuery: select 'x'
-      testWhileIdle: true
-      testOnBorrow: false
-      testOnReturn: false
-      poolPreparedStatements: true
-      maxOpenPreparedStatements: 20
+          name: test
+          url: jdbc:mysql://${MYSQL_HOST:47.75.36.103}:${MYSQL_PORT:3333}/test?useUnicode=true&characterEncoding=UTF8
+          username: db_test
+          password: db_test
+          # 使用druid数据源
+          type: com.alibaba.druid.pool.DruidDataSource
+          driver-class-name: com.mysql.jdbc.Driver
+          filters: stat
+          maxActive: 20
+          initialSize: 1
+          maxWait: 60000
+          minIdle: 1
+          timeBetweenEvictionRunsMillis: 60000
+          minEvictableIdleTimeMillis: 300000
+          validationQuery: select 'x'
+          testWhileIdle: true
+          testOnBorrow: false
+          testOnReturn: false
+          poolPreparedStatements: true
+          maxOpenPreparedStatements: 20
     rabbitmq:
       host: ${RABBIT_MQ_HOST:47.75.36.103}
       port:  ${RABBIT_MQ_PORT:5672}
-      username: guest
-      password: guest
+      username: ljl
+      password: 123456
     sleuth:
       enabled: true
       http:
         legacy:
           enabled: true
-
 server:
-    port: 9777 #启动端口
+    port: 9778 #启动端口
 
 feign:
   httpclient:
@@ -104,12 +103,9 @@ eureka:
         serviceUrl:
                     # docker 部署开启
             defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
-
-
-
 jwt:
   header: Authorization
-  secret: 88888888
+  secret: mySecret
   expiration: 604800
 
 logging:

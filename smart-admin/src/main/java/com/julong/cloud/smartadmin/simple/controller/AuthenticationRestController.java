@@ -29,7 +29,7 @@ public class AuthenticationRestController {
 
     @Autowired
     private UserRepository userRepository;
-
+    @Autowired
     private PasswordEncoder encoder;
 
     @IgnoreUserToken
