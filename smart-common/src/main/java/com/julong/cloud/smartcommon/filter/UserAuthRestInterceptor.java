@@ -4,6 +4,7 @@ import com.julong.cloud.smartcommon.annotation.IgnoreUserToken;
 import com.julong.cloud.smartcommon.context.BaseContextHandler;
 import com.julong.cloud.smartcommon.exception.UserTokenException;
 import com.julong.cloud.smartcommon.jwt.JwtTokenUtil;
+import com.julong.cloud.smartcommon.util.StringUtils;
 import io.jsonwebtoken.Claims;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +32,10 @@ public class UserAuthRestInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        String token = request.getHeader(this.tokenHeader);
+        if(!StringUtils.isEmpty(token)){
+            BaseContextHandler.setToken(token);
+        }
         if(handler instanceof HandlerMethod){
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 配置该注解，说明不进行用户拦截
@@ -44,7 +49,7 @@ public class UserAuthRestInterceptor extends HandlerInterceptorAdapter {
             if ("1".equals(request.getParameter("i"))) {
                 return super.preHandle(request, response, handler);
             }
-            String token = request.getHeader(this.tokenHeader);
+
             if (token != null && token.startsWith("Bearer ")) {
                 String authToken = token.substring(7);
                 String userid = jwtTokenUtil.getUseridFromToken(authToken);
