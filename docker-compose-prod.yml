@@ -1,0 +1,51 @@
+version: '2.1'
+services:
+  smart-center:
+    image: qq57694878/smart-center
+    ports:
+      - "8761:8761"
+  smart-auth:
+    image: qq57694878/smart-auth
+    ports:
+      - "9777:9777"
+    depends_on:
+      - smart-center
+    environment:
+      EUREKA_HOST: smart-center
+      EUREKA_PORT: 8761
+      REDIS_HOST: 47.75.36.103
+      REDIS_PORT: 6379
+      MYSQL_HOST: 47.75.36.103
+      MYSQL_PORT: 3333
+      RABBIT_MQ_HOST: 47.75.36.103
+      RABBIT_MQ_HOST: 5672
+  smart-admin:
+    image: qq57694878/smart-admin
+    ports:
+      - "9778:9778"
+    depends_on:
+      - smart-center
+    environment:
+      EUREKA_HOST: smart-center
+      EUREKA_PORT: 8761
+      REDIS_HOST: 47.75.36.103
+      REDIS_PORT: 6379
+      MYSQL_HOST: 47.75.36.103
+      MYSQL_PORT: 3333
+      RABBIT_MQ_HOST: 47.75.36.103
+      RABBIT_MQ_HOST: 5672
+  smart-gate:
+    image: qq57694878/smart-gate
+    ports:
+      - "8888:8888"
+    depends_on:
+      - smart-center
+    environment:
+      EUREKA_HOST: smart-center
+      EUREKA_PORT: 8761
+      REDIS_HOST: 47.75.36.103
+      REDIS_PORT: 6379
+      MYSQL_HOST: 47.75.36.103
+      MYSQL_PORT: 3333
+      RABBIT_MQ_HOST: 47.75.36.103
+      RABBIT_MQ_HOST: 5672

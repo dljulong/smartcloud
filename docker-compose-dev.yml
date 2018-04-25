@@ -1,0 +1,10 @@
+version: '2.1'
+services:
+  smart-center:
+    build: smart-center
+  smart-auth:
+    build: smart-auth
+  smart-admin:
+    build: smart-admin
+  smart-gate:
+    build: smart-gate
