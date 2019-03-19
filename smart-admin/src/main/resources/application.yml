@@ -61,6 +61,18 @@ spring:
       http:
         legacy:
           enabled: true
+    cloud:
+        stream:
+          bindings:
+            test-string:
+              group: g1
+              destination: dest1
+            test-json:
+              group: g2
+              destination: dest2
+            test-bean:
+              group: g3
+              destination: dest3
 server:
     port: 9778 #启动端口
 
@@ -111,7 +123,8 @@ jwt:
 logging:
   level:
     root: debug
-    org.springframework.web: debug
+    org.springframework: info
+    sun.rmi.transport.tcp: info
     org.hibernate: error
     com.julong.cloud: debug
 

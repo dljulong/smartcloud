@@ -37,4 +37,4 @@ eureka:
         serviceUrl:
 #            defaultZone: http://localhost:8761/eureka/
                     # docker 部署开启
-            defaultZone: http://${EUREKA_HOST:localhost}:${EUREKA_PORT:8761}/eureka/
+            defaultZone: http://${EUREKA_HOST:47.75.36.103}:${EUREKA_PORT:8761}/eureka/

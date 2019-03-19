@@ -63,6 +63,15 @@ spring:
       http:
         legacy:
           enabled: true
+    cloud:
+      stream:
+        bindings:
+          test-string:
+            destination: dest1
+          test-json:
+            destination: dest2
+          test-bean:
+            destination: dest3
 
 
 feign:
@@ -112,7 +121,8 @@ jwt:
 logging:
   level:
     root: info
-    org.springframework.web: debug
+    org.springframework: info
+    sun.rmi.transport.tcp: info
     org.hibernate: error
     com.julong.cloud: debug
 
