@@ -3,23 +3,19 @@ package com.github.dljulong.cloud.smartadmin.config;
 import com.github.dljulong.cloud.smartcommon.filter.UserAuthRestInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 
 @Configuration
-public class WebMvcConfig  {
-    @Bean
-    public WebMvcConfigurer corsConfigurer() {
-        return new WebMvcConfigurer() {
+@EnableWebMvc
+public class WebMvcConfig  implements WebMvcConfigurer{
+
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
                         .allowedOrigins("*")
                         .allowedMethods("*")
-                        .allowedHeaders("*")
-                        .allowCredentials(false).maxAge(3600);
+                        .allowedHeaders("*").exposedHeaders("userid","username")
+                        .allowCredentials(true).maxAge(3600);
             }
 
             @Override
@@ -41,8 +37,6 @@ public class WebMvcConfig  {
                         .excludePathPatterns("/static/*");
             }
 
-        };
-    }
 
     @Bean
     UserAuthRestInterceptor getUserAuthRestInterceptor() {

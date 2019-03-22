@@ -122,7 +122,7 @@ jwt:
 
 logging:
   level:
-    root: debug
+    root: info
     org.springframework: info
     sun.rmi.transport.tcp: info
     org.hibernate: error
